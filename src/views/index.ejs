@@ -1,0 +1,31 @@
+<%- include ('./layout/header.ejs') %>
+<body>
+    <div class="main">
+        <div class="text-center mt-5">
+            <div style="text-transform: uppercase; font-size: 30px">
+                Đỡ phải nghĩ xem hôm nay ăn gì!
+            </div>
+        </div>
+        <div class="result text-center" style="text-transform: uppercase; font-size: 30px; color: red; font-weight: 600">
+            Kết quả
+            <div id="result-place"></div>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-info" id="get-foot">Lấy đồ ăn</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#get-foot').click(async function () {
+            const response = await axios.get('/api/v1/get-food')
+                .then(res => {
+                    console.log(res.data.message);
+                    $('#result-place').text(res.data.message);
+                }).catch(e => {
+
+                });
+        });
+    });
+</script>
+<%- include ('./layout/footer.ejs') %>
